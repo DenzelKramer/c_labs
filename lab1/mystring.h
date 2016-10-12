@@ -1,7 +1,7 @@
 #ifndef MYSTRING
 #define MYSTRING
 
-char isPalindrom(char *string);
+char isPalindrom(const char *string);
 
 int substr(const char *string1, const char *string2);
 

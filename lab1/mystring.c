@@ -2,17 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char isPalindrom(char *string){
+char isPalindrom(const char *string){
 
-  unsigned int length = strlen(string) - 2;
+  unsigned int length = strlen(string);
+  
   if(length == 0){
     return 0;
   }
 
   char palindrom = 1;
 
-  for(unsigned int i = 0; i < length / 2 + length % 2; i++){
-    if( string[i] != string[length-i]){
+  for(unsigned int i = 0; i < length / 2 ; i++){
+    if( string[i] != string[length - 1 - i]){
       palindrom = 0;
     }
   }
@@ -54,12 +55,18 @@ char* makepal(const char *string){
 
   unsigned int length = strlen(string);
 
+  if(isPalindrom(string)){
+    result = (char*)malloc(length);
+    strcpy(result, string);
+    return result;
+  }
+
   char lastChar = string[length-1];
 
-  unsigned int lastPosition = -1;
+  long lastPosition = -1;
 
-  for(unsigned int i = 0; i < length-1; i++){
-    if(string[i] == lastChar) lastPosition = i;
+  for(unsigned int i = 0; i < length; i++){
+    if(string[i] == lastChar) { lastPosition = i; }
   }
 
   if(lastPosition >= 0){
@@ -67,19 +74,18 @@ char* makepal(const char *string){
     result = (char*)malloc(length + lastPosition);
 
     strcpy(result, string);
-    printf("%d\n", lastPosition);
+    
     for(unsigned int i = 0 ; i < lastPosition ; i++){
-      printf("%d %d %c\n", i, lastPosition, string[lastPosition]);
       result [length + i] = string[lastPosition -1 - i];
     }
 
   }else{
-    result = (char*)malloc(length*2);
+    result = (char*)malloc(length*2-1);
 
     strcpy(result, string);
-
+    
     for(unsigned int i = 0; i < length; i++){
-      result[length+i] = string[length-i];
+      result[length+i-1] = string[length -1 -i];
     }
   }
 
@@ -87,6 +93,5 @@ char* makepal(const char *string){
 }
 
 int subseq(const char *s1, const char *s2){
-
   return 0;
 }
