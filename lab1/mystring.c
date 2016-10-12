@@ -69,8 +69,12 @@ char* makepal(const char *string){
     if(string[i] == lastChar) { lastPosition = i; }
   }
 
-  if(lastPosition >= 0){
 
+  printf("%d\n", lastPosition);
+  if(lastPosition >= 0){
+    if(string[lastPosition] == string[lastPosition - 1]){
+      lastPosition--;
+    }
     result = (char*)malloc(length + lastPosition);
 
     strcpy(result, string);
