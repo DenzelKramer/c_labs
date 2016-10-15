@@ -19,11 +19,17 @@ int test(const char *name, int result, int require){
 }
 
 int main(){
-
+	
+	//isPalindrom
 	test("asdsa is palindrom", isPalindrom("asdsa"), 1);
 	test("a is palindrom", isPalindrom("a"), 1);
-	test("as is not palindrom", isPalindrom("as"), 1);
+	test("as is not palindrom", isPalindrom("as"), 0);
 	test("assa is palindrom", isPalindrom("assa"), 1);
+
+	//subseq
+	test("asd and cvb = 0", subseq("asd", "cvb") == 0, 1);
+	test("asd and asd = 3", subseq("asd", "asd") == 3, 1);
+	test("asdeasd and ascsdeas = 5", subseq("asdeasd", "ascsdeas") == 5, 1);
 
 	return 0;
 

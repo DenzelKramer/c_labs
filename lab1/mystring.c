@@ -97,5 +97,35 @@ char* makepal(const char *string){
 }
 
 int subseq(const char *s1, const char *s2){
-  return 0;
+  
+  int length1 = strlen(s1);
+  int length2 = strlen(s2);
+
+  int matrixSizeN = length1 + 1;
+  int matrixSizeM = length2 + 1;
+
+  int strings_matrix[matrixSizeN][matrixSizeM];
+
+  memset(strings_matrix, 0, 
+    sizeof(strings_matrix[0][0]) * (matrixSizeN) * (matrixSizeM));
+
+  int max = 0;
+
+  for(int i =1; i < matrixSizeN; i++) {
+
+    for(int j = 1; j < matrixSizeM; j++) {
+      
+      if(s1[i-1] == s2[j-1]){
+          strings_matrix[i][j] = strings_matrix[i-1][j-1] + 1;
+          if(max < strings_matrix[i][j]) {
+            max = strings_matrix[i][j];
+          }
+      }
+
+    } 
+
+  }
+
+  return max;
+
 }
