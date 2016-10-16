@@ -1,11 +1,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 char isPalindrom(const char *string){
 
   unsigned int length = strlen(string);
-  
+
   if(length == 0){
     return 0;
   }
@@ -78,7 +79,7 @@ char* makepal(const char *string){
     result = (char*)malloc(length + lastPosition);
 
     strcpy(result, string);
-    
+
     for(unsigned int i = 0 ; i < lastPosition ; i++){
       result [length + i] = string[lastPosition -1 - i];
     }
@@ -87,7 +88,7 @@ char* makepal(const char *string){
     result = (char*)malloc(length*2-1);
 
     strcpy(result, string);
-    
+
     for(unsigned int i = 0; i < length; i++){
       result[length+i-1] = string[length -1 -i];
     }
@@ -97,7 +98,7 @@ char* makepal(const char *string){
 }
 
 int subseq(const char *s1, const char *s2){
-  
+
   int length1 = strlen(s1);
   int length2 = strlen(s2);
 
@@ -106,7 +107,7 @@ int subseq(const char *s1, const char *s2){
 
   int strings_matrix[matrixSizeN][matrixSizeM];
 
-  memset(strings_matrix, 0, 
+  memset(strings_matrix, 0,
     sizeof(strings_matrix[0][0]) * (matrixSizeN) * (matrixSizeM));
 
   int max = 0;
@@ -114,7 +115,7 @@ int subseq(const char *s1, const char *s2){
   for(int i =1; i < matrixSizeN; i++) {
 
     for(int j = 1; j < matrixSizeM; j++) {
-      
+
       if(s1[i-1] == s2[j-1]){
           strings_matrix[i][j] = strings_matrix[i-1][j-1] + 1;
           if(max < strings_matrix[i][j]) {
@@ -122,10 +123,44 @@ int subseq(const char *s1, const char *s2){
           }
       }
 
-    } 
+    }
 
   }
 
   return max;
 
 }
+
+double* txt2double(const char *string, int *size){
+    double *arr = NULL;
+    char *ptr = string;
+    const int len = strlen(string);
+    *size = 0;
+
+    do
+    {
+        if (isdigit(*ptr))
+        {
+            if ((arr = realloc(arr, ++*size * sizeof(double))) == NULL)
+                return NULL;
+
+            arr[*size - 1] = strtod(ptr, &ptr);
+        }
+        else
+            if (*ptr == ';' && !(*ptr == '.' && !isdigit(*(ptr + 1))))
+            {
+            ptr++;
+            }
+            else
+            {
+            *size = 0;
+            free(arr);
+
+            return NULL;
+            }
+        }
+        while (ptr < string + len);
+
+    return arr;
+}
+

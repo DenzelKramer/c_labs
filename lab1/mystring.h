@@ -9,4 +9,6 @@ char* makepal(const char *string);
 
 int subseq(const char *s1, const char *s2);
 
+double* txt2double(const char *string, int *size);
+
 #endif
