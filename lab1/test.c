@@ -30,6 +30,7 @@ int main(){
 	test("asd and cvb = 0", subseq("asd", "cvb") == 0, 1);
 	test("asd and asd = 3", subseq("asd", "asd") == 3, 1);
 	test("asdeasd and ascsdeas = 5", subseq("asdeasd", "ascsdeas") == 5, 1);
+	test("asde and easd = 3", subseq("asde", "easd") == 3, 1);
 
 	return 0;
 
